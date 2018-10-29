@@ -65,8 +65,6 @@ function drawDots(context) {
  */
 
 function drawLines(context) {
-    console.log(dotPositions);
-
     context.strokeStyle = "black";
     context.beginPath();
     for (var i = 0; i < nrOfDots; i++) {
