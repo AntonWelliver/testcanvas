@@ -3,9 +3,11 @@ var nrOfDots = 12;
 var multiplier = 2;
 
 var circleRadius = 200;
-var dotRadius = 10;
+var dotRadius = 3;
 var lineWidth = 1;
 var offset = 50;
+
+var dotPositions = [];
 
 function draw() {
     var canvas = document.querySelector("canvas");
@@ -13,7 +15,7 @@ function draw() {
 
     drawCircle(context);
     drawDots(context);
-    /* drawLines(context); */
+    drawLines(context);
     
 }
 
@@ -38,12 +40,31 @@ function drawCircle(context) {
 
 function drawDots(context) {
     context.beginPath();
-
     context.fillStyle = "black";
-    var outlineCircleCenter = circleRadius + offset;
-    var x = outlineCircleCenter + circleRadius * Math.cos(0);
-    var y = outlineCircleCenter + circleRadius * Math.sin(0);
-    context.arc(x, y, dotRadius, 0, 2 * Math.PI);
 
-    context.fill();
+    for (var i = 0; i < nrOfDots; i++) {
+        var angle = 2 * Math.PI / nrOfDots * i;
+        var outlineCircleCenter = circleRadius + offset;
+        var x = outlineCircleCenter + circleRadius * Math.cos(angle);
+        var y = outlineCircleCenter + circleRadius * Math.sin(angle);
+        context.moveTo(x, y);
+        context.arc(x, y, dotRadius, 0, 2 * Math.PI);
+
+        dotPositions.push({
+            x: x,
+            y: y,
+        });
+    }
+
+        context.fill();
+}
+
+/**
+ * Draws a line from each line to another based on multiplier value.
+ * @param {CanvasRenderingContext2D} context
+ */
+
+function drawLines(context) {
+    console.log(dotPositions);
+
 }
