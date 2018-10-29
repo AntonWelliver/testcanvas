@@ -67,4 +67,16 @@ function drawDots(context) {
 function drawLines(context) {
     console.log(dotPositions);
 
+    context.strokeStyle = "black";
+    context.beginPath();
+    for (var i = 0; i < nrOfDots; i++) {
+        var startPoint = dotPositions[i];
+        var nextIndex = (i * multiplier) % nrOfDots;
+        var endPoint = dotPositions[nextIndex];
+
+        context.moveTo(startPoint.x, startPoint.y);
+        context.lineTo(endPoint.x, endPoint.y);
+
+    }
+    context.stroke();
 }
